@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>pr0ject | مشاريع دراسية بإبداع</title>
+    <meta name="description" content="نصمم مشاريعك الدراسية وعروضك التقديمية باحترافية وجودة عالية. بحوث طلابية، برزنتيشن احترافي، وتنسيق حسابات انستقرام في سلطنة عمان.">
+    <meta name="keywords" content="مشاريع دراسية, بحوث طلابية, عروض تقديمية, برزنتيشن, عمان, تصميم مشاريع, تنسيق انستقرام, خدمات طلابية, pr0ject, بوربوينت">
+    
+    <meta property="og:title" content="pr0ject Studio - لخدمات الطلاب">
+    <meta property="og:description" content="مشاريع، برزنتيشن، وتنسيق حسابات بأفضل الأسعار.">
+    <meta property="og:image" content="https://i.ibb.co/example/logo.png"> 
+    <meta property="og:url" content="https://api.whatsapp.com/send?phone=96878487014">
+
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <style>
+        :root { 
+            --accent: #b08968; 
+            --dark: #1a1a1a; 
+            --light: #fdfaf7; 
+            --whatsapp: #25d366;
+            --insta: #e1306c;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
+        html { font-size: 14px; scroll-behavior: smooth; }
+        body { background: var(--light); color: var(--dark); line-height: 1.6; overflow-x: hidden; }
+
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 8%; background: #fff;
+            position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .logo { font-size: 1.6rem; font-weight: 900; color: var(--accent); text-decoration: none; }
+        nav.desktop-nav { display: flex; gap: 1.5rem; align-items: center; }
+        nav a { text-decoration: none; color: var(--dark); font-weight: 700; font-size: 0.95rem; transition: 0.3s; }
+        nav a:hover { color: var(--accent); }
+        .menu-btn { display: none; font-size: 1.5rem; cursor: pointer; color: var(--dark); }
+
+        .sidebar {
+            position: fixed; top: 0; right: -100%; width: 250px; height: 100%;
+            background: white; z-index: 2000; transition: 0.4s; padding: 2rem;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        }
+        .sidebar.active { right: 0; }
+        .sidebar-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 1999; display: none;
+        }
+        .sidebar-overlay.active { display: block; }
+        .close-btn { position: absolute; top: 20px; left: 20px; font-size: 1.5rem; cursor: pointer; }
+
+        .hero {
+            padding: 6rem 8%; text-align: center;
+            background: linear-gradient(135deg, #fdfaf7 0%, #ede3d5 100%);
+        }
+        .hero h1 { font-size: clamp(2.2rem, 7vw, 3.5rem); font-weight: 900; margin-bottom: 1rem; }
+        .hero p { font-size: 1.1rem; color: #555; max-width: 600px; margin: 0 auto 2rem; }
+        .cta-main {
+            padding: 1rem 3rem; background: var(--dark); color: white;
+            text-decoration: none; border-radius: 50px; font-weight: bold; transition: 0.3s;
+            display: inline-block;
+        }
+        .cta-main:hover { transform: scale(1.05); background: var(--accent); }
+
+        .section-padding { padding: 5rem 8%; }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-header h2 { font-size: 2rem; font-weight: 800; color: var(--dark); }
+
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;
+        }
+        .feature-card {
+            background: white; padding: 2.5rem 1.5rem; border-radius: 20px;
+            text-align: center; border: 1px solid rgba(176,137,104,0.1); transition: 0.4s;
+        }
+        .feature-card:hover { transform: translateY(-10px); border-color: var(--accent); }
+        .feature-card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem; display: block; }
+
+        .testimonials { background: #fff; }
+        .testimonials-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;
+        }
+        .testimonial-card {
+            background: var(--light); padding: 2rem; border-radius: 15px;
+            text-align: center; border: 1px solid rgba(0,0,0,0.02);
+        }
+        .stars { color: #f1c40f; margin-bottom: 1rem; }
+        .testimonial-card p { font-style: italic; font-size: 1rem; color: #444; margin-bottom: 1rem; }
+        .client-name { font-weight: 700; color: var(--accent); }
+
+        .offers-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;
+        }
+        .offer-card {
+            background: white; border-radius: 20px; padding: 2rem; position: relative;
+            border: 1px solid rgba(0,0,0,0.05); transition: 0.4s; display: flex; flex-direction: column;
+        }
+        .offer-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+        .badge {
+            position: absolute; top: 15px; left: 15px; background: var(--accent);
+            color: white; padding: 4px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: bold;
+        }
+
+        .btn-ws {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            background: var(--whatsapp); color: white; text-decoration: none;
+            padding: 0.8rem; border-radius: 12px; font-weight: bold; transition: 0.3s;
+            margin-top: auto;
+        }
+
+        footer { padding: 4rem 8%; background: var(--dark); color: white; text-align: center; }
+        .social-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2rem; }
+        .social-links a { color: white; font-size: 1.8rem; transition: 0.3s; }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem 5%; }
+            nav.desktop-nav { display: none; }
+            .menu-btn { display: block; }
+            .section-padding { padding: 4rem 5%; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">pr0ject</a>
+    <nav class="desktop-nav">
+        <a href="index.html">🏠 الرئيسية</a>
+        <a href="products.html">🛍️ منتجاتنا</a>
+        <a href="#contact">📞 تواصل معنا</a>
+    </nav>
+    <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+</header>
+
+<div class="sidebar-overlay" id="overlay" onclick="toggleMenu()"></div>
+<div class="sidebar" id="sidebar">
+    <div class="close-btn" onclick="toggleMenu()"><i class="fas fa-times"></i></div>
+    <nav style="display: flex; flex-direction: column; gap: 2rem; margin-top: 3rem; padding: 1rem;">
+        <a href="index.html" onclick="toggleMenu()" style="text-decoration: none; color: var(--dark); font-weight: 700;">🏠 الرئيسية</a>
+        <a href="products.html" onclick="toggleMenu()" style="text-decoration: none; color: var(--dark); font-weight: 700;">🛍️ منتجاتنا</a>
+        <a href="#contact" onclick="toggleMenu()" style="text-decoration: none; color: var(--dark); font-weight: 700;">📞 تواصل معنا</a>
+    </nav>
+</div>
+
+<section class="hero" data-aos="fade-up">
+    <h1>مشاريعك الدراسية <br><span style="color: var(--accent);">بإبداع لا حدود له</span></h1>
+    <p>جودة احترافية، سرعة في التنفيذ، وأسعار تنافسية تناسب الجميع.</p>
+    <a href="products.html" class="cta-main">تصفح المتجر</a>
+</section>
+
+<section class="section-padding">
+    <div class="features-grid">
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+            <i class="fas fa-paint-brush"></i>
+            <h3>تصميم مبتكر</h3>
+            <p>تنسيق فريد يضمن لك التميز في عرض أفكارك.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+            <i class="fas fa-book"></i>
+            <h3>مشاريع دراسية</h3>
+            <p>إعداد مشاريع وبحوث متكاملة لجميع المراحل.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+            <i class="fas fa-file-powerpoint"></i>
+            <h3>برزنتيشن احترافي</h3>
+            <p>عروض تقديمية جذابة وسهلة في الشرح والتقديم.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section-padding testimonials">
+    <div class="section-header" data-aos="fade-up">
+        <h2>آراء المبدعين ✨</h2>
+    </div>
+    <div class="testimonials-grid">
+        <div class="testimonial-card" data-aos="zoom-in" data-aos-delay="100">
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p>"شغل مرتب وسريع جداً، البرزنتيشن كان ملفت والكل سألني عنه. شكراً لكم!"</p>
+            <div class="client-name">أحمد المعمري</div>
+        </div>
+        <div class="testimonial-card" data-aos="zoom-in" data-aos-delay="200">
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p>"تعامل راقي جداً والالتزام بالموقت هو أهم ميزة عندهم. أنصح الجميع بالتعامل معهم."</p>
+            <div class="client-name">سارة البلوشي</div>
+        </div>
+        <div class="testimonial-card" data-aos="zoom-in" data-aos-delay="300">
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p>"طلبت بحث متكامل وما قصروا، دقة في المعلومات وتنسيق يفتح النفس."</p>
+            <div class="client-name">فاطمة الحوسني</div>
+        </div>
+    </div>
+</section>
+
+<section class="section-padding">
+    <div class="section-header" data-aos="fade-down">
+        <h2>عروضنا الحصرية 🔥</h2>
+    </div>
+
+    <div class="offers-grid">
+        <div class="offer-card" data-aos="flip-left">
+            <span class="badge" style="background: #2e7d32;">خصم خاص</span>
+            <h3>العرض الرمضاني 🌙</h3>
+            <p>خصم 10% على كافة الطلبات طوال الشهر الفضيل.</p>
+            <span style="font-weight: 900; margin-bottom: 1.5rem; display: block;">خصم 10% لكل المشاريع</span>
+            <a href="https://api.whatsapp.com/send?phone=96878487014&text=أهلاً، أرغب في الاستفادة من خصم رمضان" target="_blank" class="btn-ws">
+                <i class="fab fa-whatsapp"></i> اطلب الآن
+            </a>
+        </div>
+
+        <div class="offer-card" data-aos="flip-left" data-aos-delay="100">
+            <span class="badge">الأكثر طلباً</span>
+            <h3>باقة 2 + 1 مجاناً</h3>
+            <p>اطلب مشروعين واحصل على الثالث مجاناً بالكامل.</p>
+            <span style="font-weight: 900; margin-bottom: 1.5rem; display: block;">3 مشاريع بسعر 2</span>
+            <a href="https://api.whatsapp.com/send?phone=96878487014&text=أهلاً، أرغب في عرض 2+1 مجاناً" target="_blank" class="btn-ws">
+                <i class="fab fa-whatsapp"></i> اطلب العرض
+            </a>
+        </div>
+
+        <div class="offer-card" data-aos="flip-left" data-aos-delay="200">
+            <span class="badge" style="background: #d32f2f;">عرض محدود</span>
+            <h3>ثيم الانستقرام</h3>
+            <p>تغيير كامل للحساب وتغيير الثيم والهوية البصرية بشكل احترافي.</p>
+            <span style="font-weight: 900; margin-bottom: 1.5rem; display: block;">بسعر : 15 ر.ع فقط</span>
+            <a href="https://api.whatsapp.com/send?phone=96878487014&text=أهلاً، أرغب في الاستفسار عن باقة ثيم الانستقرام" target="_blank" class="btn-ws">
+                <i class="fab fa-whatsapp"></i> اطلب الباقة
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer id="contact">
+    <div class="social-links">
+        <a href="https://api.whatsapp.com/send?phone=96878487014" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://www.instagram.com/pr0ject_70" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p>© 2026 pr0ject Studio. جميع الحقوق محفوظة</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+
+    function toggleMenu() {
+        document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('overlay').classList.toggle('active');
+    }
+</script>
+
+</body>
+</html>
