@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>متجر pr0ject | منتجاتنا وخدماتنا</title>
+    <meta name="description" content="تصفح قائمة خدمات pr0ject للمشاريع الدراسية، العروض التقديمية، وخدمات الذكاء الاصطناعي في سلطنة عمان.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <style>
+        :root { 
+            --accent: #b08968; 
+            --dark: #1a1a1a; 
+            --light: #fdfaf7; 
+            --whatsapp: #25d366;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
+        body { background: var(--light); color: var(--dark); line-height: 1.6; overflow-x: hidden; }
+
+        /* الرأس - Header */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.2rem 8%; background: #fff;
+            position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        .logo { font-size: 1.8rem; font-weight: 900; color: var(--accent); text-decoration: none; }
+        .logo span { color: var(--dark); }
+        nav.desktop-nav { display: flex; gap: 2rem; align-items: center; }
+        nav a { text-decoration: none; color: var(--dark); font-weight: 700; font-size: 1rem; transition: 0.3s; }
+        nav a:hover, nav a.active { color: var(--accent); }
+        .menu-btn { display: none; font-size: 1.5rem; cursor: pointer; color: var(--dark); }
+
+        /* القائمة الجانبية */
+        .sidebar { position: fixed; top: 0; right: -100%; width: 280px; height: 100%; background: white; z-index: 2000; transition: 0.4s; padding: 2rem; box-shadow: -10px 0 30px rgba(0,0,0,0.1); }
+        .sidebar.active { right: 0; }
+        .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1999; display: none; backdrop-filter: blur(4px); }
+        .sidebar-overlay.active { display: block; }
+        .close-btn { text-align: left; font-size: 1.8rem; cursor: pointer; margin-bottom: 2rem; }
+
+        /* عنوان الصفحة والفلتر */
+        .page-header { padding: 4rem 8% 2rem; text-align: center; background: #fff; }
+        .page-header h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 1.5rem; }
+        
+        .filter-container { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+        .filter-btn { 
+            padding: 8px 20px; border: 1.5px solid var(--accent); background: transparent; 
+            border-radius: 50px; cursor: pointer; font-weight: 700; transition: 0.3s; color: var(--accent);
+        }
+        .filter-btn.active { background: var(--accent); color: #fff; }
+
+        /* شبكة المنتجات */
+        .products-grid { 
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+            gap: 25px; padding: 2rem 8% 5rem; min-height: 400px;
+        }
+
+        .card { 
+            background: #fff; border-radius: 20px; overflow: hidden; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03); display: flex; flex-direction: column; 
+            transition: 0.3s; border: 1px solid rgba(0,0,0,0.02);
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(176,137,104,0.15); }
+        
+        .card-img { height: 180px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; overflow: hidden; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .c-cat { font-size: 0.8rem; color: var(--accent); font-weight: 700; margin-bottom: 8px; text-transform: uppercase; }
+        .c-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 12px; line-height: 1.4; min-height: 3rem; }
+        .c-price { font-size: 1.3rem; font-weight: 900; color: var(--dark); margin-top: auto; margin-bottom: 15px; }
+        
+        .buy-btn { 
+            background: var(--whatsapp); color: white; text-decoration: none; 
+            text-align: center; padding: 12px; border-radius: 12px; font-weight: bold; 
+            display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s;
+        }
+        .buy-btn:hover { opacity: 0.9; transform: scale(1.02); }
+
+        /* حالة التحميل */
+        #status { text-align: center; padding: 5rem; font-size: 1.2rem; font-weight: bold; color: var(--accent); }
+
+        /* التذيل - Footer */
+        footer { padding: 4rem 8% 2rem; background: var(--dark); color: white; text-align: center; }
+        .footer-logo { font-size: 2rem; font-weight: 900; color: var(--accent); text-decoration: none; margin-bottom: 1rem; display: block; }
+        .social-links { display: flex; justify-content: center; gap: 1.5rem; margin: 2rem 0; }
+        .social-links a { color: white; font-size: 1.8rem; transition: 0.3s; }
+        .social-links a:hover { color: var(--accent); transform: translateY(-5px); }
+        .copyright { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; color: #777; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem 5%; }
+            .menu-btn { display: block; }
+            nav.desktop-nav { display: none; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 1rem 5%; }
+            .card-img { height: 140px; }
+            .c-title { font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">pr0ject<span>.</span></a>
+    <nav class="desktop-nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="products.html" class="active">المتجر</a>
+        <a href="index.html#offers">العروض</a>
+        <a href="#contact">تواصل معنا</a>
+    </nav>
+    <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+</header>
+
+<div class="sidebar-overlay" id="overlay" onclick="toggleMenu()"></div>
+<div class="sidebar" id="sidebar">
+    <div class="close-btn" onclick="toggleMenu()"><i class="fas fa-times"></i></div>
+    <nav style="display: flex; flex-direction: column; gap: 2rem;">
+        <a href="index.html" style="text-decoration: none; color: var(--dark); font-weight: 700;">🏠 الرئيسية</a>
+        <a href="products.html" style="text-decoration: none; color: var(--accent); font-weight: 700;">🛍️ المتجر</a>
+        <a href="index.html#offers" onclick="toggleMenu()" style="text-decoration: none; color: var(--dark); font-weight: 700;">🔥 العروض</a>
+        <a href="#contact" onclick="toggleMenu()" style="text-decoration: none; color: var(--dark); font-weight: 700;">📞 تواصل معنا</a>
+    </nav>
+</div>
+
+<section class="page-header" data-aos="fade-down">
+    <h1>استكشف خدماتنا</h1>
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filterItems('الكل', this)">الكل</button>
+        <button class="filter-btn" onclick="filterItems('عروض تقديميه', this)">عروض تقديميه</button>
+        <button class="filter-btn" onclick="filterItems('منتجات ai', this)">منتجات AI</button>
+        <button class="filter-btn" onclick="filterItems('مواقع الكترونيه', this)">مواقع</button>
+        <button class="filter-btn" onclick="filterItems('خدمات الكترونيه', this)">خدمات</button>
+        <button class="filter-btn" onclick="filterItems('تصميم فيديو', this)">فيديو</button>
+    </div>
+</section>
+
+<div id="status">جاري جلب المنتجات من الخزنة...</div>
+<div class="products-grid" id="grid"></div>
+
+<footer id="contact">
+    <a href="#" class="footer-logo">pr0ject<span>.</span></a>
+    <p>نحول طموحاتك الدراسية إلى واقع إبداعي ملموس.</p>
+    <div class="social-links">
+        <a href="https://wa.me/96878487014" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://www.instagram.com/pr0ject_70" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+    <div class="copyright">
+        © 2026 pr0ject Studio. جميع الحقوق محفوظة
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: true });
+
+    function toggleMenu() {
+        document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('overlay').classList.toggle('active');
+    }
+
+    // رابط السكربت الخاص بك
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyc9UpRrkkk3PzrcBBlMwiYT2HVi0XSDWsM2D-kwPxn_yXBfs3vL97hi9SaniJw7IEvbA/exec';
+    let products = [];
+
+    async function loadData() {
+        try {
+            const response = await fetch(scriptURL);
+            products = await response.json();
+            render(products);
+            document.getElementById('status').style.display = 'none';
+        } catch (e) {
+            document.getElementById('status').innerText = 'تعذر الاتصال بالبيانات، يرجى المحاولة لاحقاً.';
+        }
+    }
+
+    function render(data) {
+        const grid = document.getElementById('grid');
+        grid.innerHTML = data.map(p => {
+            const imgContent = (p.image && p.image.includes('http')) 
+                ? `<img src="${p.image}" alt="${p.title}">` 
+                : `<span>${p.image || '📦'}</span>`;
+
+            return `
+                <div class="card" data-aos="zoom-in">
+                    <div class="card-img">${imgContent}</div>
+                    <div class="card-body">
+                        <span class="c-cat">${p.category}</span>
+                        <h3 class="c-title">${p.title}</h3>
+                        <span class="c-price">${p.price} ر.ع</span>
+                        <a href="https://wa.me/96878487014?text=طلب:%20${encodeURIComponent(p.title)}" class="buy-btn">
+                            <i class="fab fa-whatsapp"></i> اطلب الآن
+                        </a>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function filterItems(cat, btn) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (cat === 'الكل') {
+            render(products);
+        } else {
+            const filtered = products.filter(p => p.category.toLowerCase().trim() === cat.toLowerCase().trim());
+            render(filtered);
+        }
+    }
+
+    loadData();
+</script>
+
+</body>
+</html>
